@@ -1,0 +1,50 @@
+[
+  {
+    "id": "agadir-marina",
+    "name": "Agadir Marina",
+    "image": "/images/destinations/agadir-marina.jpg",
+    "descriptionFr": "Le port de plaisance d'Agadir, ses restaurants et sa promenade en bord de mer.",
+    "descriptionEn": "Agadir's marina, with its restaurants and seaside promenade.",
+    "distanceFromAgadir": "5 min"
+  },
+  {
+    "id": "taghazout",
+    "name": "Taghazout",
+    "image": "/images/destinations/taghazout.jpg",
+    "descriptionFr": "Village de surfeurs réputé, plages sauvages et vagues mythiques.",
+    "descriptionEn": "Famous surf village with wild beaches and legendary waves.",
+    "distanceFromAgadir": "35 min"
+  },
+  {
+    "id": "paradise-valley",
+    "name": "Paradise Valley",
+    "image": "/images/destinations/paradise-valley.jpg",
+    "descriptionFr": "Vallée verdoyante et piscines naturelles nichées dans les montagnes.",
+    "descriptionEn": "Lush valley with natural pools nestled in the mountains.",
+    "distanceFromAgadir": "45 min"
+  },
+  {
+    "id": "crocoparc",
+    "name": "Crocoparc",
+    "image": "/images/destinations/crocoparc.jpg",
+    "descriptionFr": "Parc animalier familial abritant l'une des plus grandes populations de crocodiles du Nil.",
+    "descriptionEn": "Family-friendly park home to one of the largest Nile crocodile populations.",
+    "distanceFromAgadir": "20 min"
+  },
+  {
+    "id": "taroudant",
+    "name": "Taroudant",
+    "image": "/images/destinations/taroudant.jpg",
+    "descriptionFr": "Ville historique entourée de remparts, surnommée la « petite Marrakech ».",
+    "descriptionEn": "Historic walled city, often called the \"little Marrakech\".",
+    "distanceFromAgadir": "1h15"
+  },
+  {
+    "id": "imsouane",
+    "name": "Imsouane",
+    "image": "/images/destinations/imsouane.jpg",
+    "descriptionFr": "Petit village de pêcheurs devenu spot de surf incontournable.",
+    "descriptionEn": "Small fishing village turned must-visit surf spot.",
+    "distanceFromAgadir": "1h"
+  }
+]

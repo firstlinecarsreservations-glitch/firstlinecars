@@ -1,0 +1,44 @@
+[
+  {
+    "id": "faq-insurance",
+    "questionFr": "L'assurance est-elle incluse ?",
+    "answerFr": "Oui, tous nos véhicules incluent une assurance de base couvrant les dommages matériels et le vol. Des options complémentaires (tous risques, franchise réduite) sont disponibles sur demande.",
+    "questionEn": "Is insurance included?",
+    "answerEn": "Yes, all our vehicles include basic insurance covering material damage and theft. Additional options (comprehensive, reduced deductible) are available on request."
+  },
+  {
+    "id": "faq-deposit",
+    "questionFr": "Proposez-vous une location sans caution ?",
+    "answerFr": "Oui, la location sans caution est possible sous certaines conditions (ancienneté du permis, mode de paiement). Contactez-nous pour vérifier votre éligibilité.",
+    "questionEn": "Do you offer rentals without a deposit?",
+    "answerEn": "Yes, deposit-free rentals are possible under certain conditions (driving licence seniority, payment method). Contact us to check your eligibility."
+  },
+  {
+    "id": "faq-mileage",
+    "questionFr": "Quel est le kilométrage inclus ?",
+    "answerFr": "Nos locations incluent 200 km/jour en standard. Une option kilométrage illimité est disponible pour les longs séjours.",
+    "questionEn": "What mileage is included?",
+    "answerEn": "Our rentals include 200 km/day as standard. An unlimited mileage option is available for longer stays."
+  },
+  {
+    "id": "faq-airport",
+    "questionFr": "Faites-vous la livraison à l'aéroport d'Agadir ?",
+    "answerFr": "Oui, la livraison à l'aéroport Agadir Al Massira est gratuite et disponible à toute heure, y compris tôt le matin ou tard le soir.",
+    "questionEn": "Do you deliver to Agadir airport?",
+    "answerEn": "Yes, delivery to Agadir Al Massira airport is free and available at any time, including early morning or late evening."
+  },
+  {
+    "id": "faq-payment",
+    "questionFr": "Quels moyens de paiement acceptez-vous ?",
+    "answerFr": "Nous acceptons les espèces, le virement bancaire, ainsi que d'autres moyens de paiement sur demande.",
+    "questionEn": "What payment methods do you accept?",
+    "answerEn": "We accept cash, bank transfer, and other payment methods on request."
+  },
+  {
+    "id": "faq-conditions",
+    "questionFr": "Quelles sont les conditions pour louer une voiture ?",
+    "answerFr": "Un permis de conduire valide depuis au moins 1 an, une pièce d'identité et un âge minimum de 21 ans sont requis.",
+    "questionEn": "What are the conditions to rent a car?",
+    "answerEn": "A valid driving licence held for at least 1 year, an ID document, and a minimum age of 21 are required."
+  }
+]

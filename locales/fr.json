@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "vehicles": "Véhicules",
+    "reviews": "Avis",
+    "faq": "FAQ",
+    "about": "À propos",
+    "contact": "Contact",
+    "bookNow": "Réserver maintenant"
+  },
+  "reviewsPage": {
+    "title": "Avis de nos clients",
+    "description": "Découvrez les retours authentiques de nos clients sur la propreté de nos véhicules, la transparence de nos prix et la qualité de notre service."
+  },
+  "faqPage": {
+    "title": "Questions fréquentes",
+    "description": "Assurance, caution, kilométrage, livraison aéroport, moyens de paiement : retrouvez toutes les réponses à vos questions avant de réserver."
+  },
+  "hero": {
+    "title": "Votre voiture idéale pour découvrir Agadir et le Maroc",
+    "description": "Véhicules récents et entretenus, assurance incluse, location possible sans caution, assistance disponible 24/7, livraison partout.",
+    "ctaBook": "Réserver une voiture",
+    "ctaWhatsapp": "Contacter WhatsApp",
+    "statReviews": "4,7/5 sur plus de 50 avis Google",
+    "statDelivery": "Livraison aéroport Al Massira",
+    "statAvailability": "Service disponible 24/7"
+  },
+  "fleet": {
+    "title": "Notre collection",
+    "subtitle": "Comparez nos véhicules et réservez en quelques clics.",
+    "priceFrom": "À partir de",
+    "perDay": "/jour",
+    "bookVehicle": "Réserver ce véhicule",
+    "viewAll": "Voir toute la flotte"
+  },
+  "vehiclesPage": {
+    "title": "Nos Voitures",
+    "description": "Découvrez notre sélection de véhicules récents, entretenus avec soin et prêts à vous accompagner dans tous vos déplacements à Agadir et dans la région Souss-Massa.",
+    "filters": {
+      "title": "Filtrer",
+      "brand": "Marque",
+      "transmission": "Transmission",
+      "fuel": "Carburant",
+      "all": "Toutes",
+      "manual": "Manuelle",
+      "automatic": "Automatique",
+      "diesel": "Diesel",
+      "essence": "Essence",
+      "hybrid": "Hybride",
+      "reset": "Réinitialiser"
+    },
+    "noResults": "Aucun véhicule ne correspond à ces filtres."
+  },
+  "vehicleCard": {
+    "seats": "personnes",
+    "book": "Réserver",
+    "whatsapp": "WhatsApp"
+  },
+  "footer": {
+    "quickLinks": "Liens rapides",
+    "home": "Accueil",
+    "address": "Adresse",
+    "rightsReserved": "Tous droits réservés."
+  }
+}

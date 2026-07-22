@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "vehicles": "Vehicles",
+    "reviews": "Reviews",
+    "faq": "FAQ",
+    "about": "About",
+    "contact": "Contact",
+    "bookNow": "Book now"
+  },
+  "reviewsPage": {
+    "title": "Customer reviews",
+    "description": "Read genuine feedback from our customers on vehicle cleanliness, transparent pricing and the quality of our service."
+  },
+  "faqPage": {
+    "title": "Frequently asked questions",
+    "description": "Insurance, deposit, mileage, airport delivery, payment methods: find every answer you need before booking."
+  },
+  "hero": {
+    "title": "Your ideal car to discover Agadir and Morocco",
+    "description": "Recent, well-maintained vehicles, insurance included, deposit-free rentals available, 24/7 assistance, delivery anywhere.",
+    "ctaBook": "Book a car",
+    "ctaWhatsapp": "Contact on WhatsApp",
+    "statReviews": "4.7/5 across 50+ Google reviews",
+    "statDelivery": "Al Massira airport delivery",
+    "statAvailability": "Available 24/7"
+  },
+  "fleet": {
+    "title": "Our collection",
+    "subtitle": "Compare our vehicles and book in a few clicks.",
+    "priceFrom": "From",
+    "perDay": "/day",
+    "bookVehicle": "Book this vehicle",
+    "viewAll": "View full fleet"
+  },
+  "vehiclesPage": {
+    "title": "Our Cars",
+    "description": "Discover our selection of recent, carefully maintained vehicles, ready to support all your trips in Agadir and the Souss-Massa region.",
+    "filters": {
+      "title": "Filter",
+      "brand": "Brand",
+      "transmission": "Transmission",
+      "fuel": "Fuel",
+      "all": "All",
+      "manual": "Manual",
+      "automatic": "Automatic",
+      "diesel": "Diesel",
+      "essence": "Petrol",
+      "hybrid": "Hybrid",
+      "reset": "Reset"
+    },
+    "noResults": "No vehicle matches these filters."
+  },
+  "vehicleCard": {
+    "seats": "seats",
+    "book": "Book",
+    "whatsapp": "WhatsApp"
+  },
+  "footer": {
+    "quickLinks": "Quick links",
+    "home": "Home",
+    "address": "Address",
+    "rightsReserved": "All rights reserved."
+  }
+}
