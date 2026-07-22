@@ -50,7 +50,7 @@ export default async function HomePage({ params }: HomePageProps) {
     <>
       <Hero locale={locale} />
 
-      <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-[90rem] px-6 py-24 sm:px-10">
         <Reveal>
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <div>

@@ -22,7 +22,7 @@ export function Footer({ locale }: FooterProps) {
 
   return (
     <footer className="border-marine-100 bg-marine-900 text-marine-100 border-t">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 sm:px-10 md:grid-cols-3">
+      <div className="mx-auto grid max-w-[90rem] gap-10 px-6 py-14 sm:px-10 md:grid-cols-3">
         <div>
           <p className="font-display text-lg font-bold text-white">
             First<span className="text-amber-400">Line</span>Cars

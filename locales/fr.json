@@ -46,12 +46,16 @@
       "diesel": "Diesel",
       "essence": "Essence",
       "hybrid": "Hybride",
-      "reset": "Réinitialiser"
+      "reset": "Réinitialiser les filtres"
     },
+    "searchLabel": "Rechercher un véhicule",
+    "searchPlaceholder": "Rechercher un modèle ou une marque...",
+    "resultsSingular": "véhicule disponible",
+    "resultsPlural": "véhicules disponibles",
     "noResults": "Aucun véhicule ne correspond à ces filtres."
   },
   "vehicleCard": {
-    "seats": "personnes",
+    "seats": "places",
     "book": "Réserver",
     "whatsapp": "WhatsApp"
   },

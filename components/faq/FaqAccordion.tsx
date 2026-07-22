@@ -19,7 +19,7 @@ export function FaqAccordion({ items, title }: FaqAccordionProps) {
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
 
   return (
-    <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-3xl px-6 py-20 sm:px-10">
       {title && (
         <Reveal>
           <h2 className="font-display text-marine-900 text-center text-3xl font-bold">

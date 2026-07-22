@@ -37,7 +37,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
       : "Bonjour FirstLineCars, je souhaite avoir des informations sur une location de voiture.";
 
   return (
-    <section className="mx-auto max-w-5xl px-6 pt-32 pb-24 sm:px-10">
+    <section className="mx-auto max-w-6xl px-6 pt-32 pb-24 sm:px-10">
       <Reveal>
         <p className="text-xs font-semibold tracking-[0.25em] text-amber-500 uppercase">
           {locale === "en" ? "Get in touch" : "Nous contacter"}

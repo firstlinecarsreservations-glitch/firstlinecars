@@ -65,7 +65,7 @@ export function BookingSummary({
             id={selectId}
             value={vehicle.id}
             onChange={(e) => onChangeVehicle(e.target.value)}
-            className="border-marine-100 bg-sand-50 text-marine-900 focus:border-marine-500 w-full appearance-none rounded-xl border px-4 py-3 pr-10 text-sm font-medium transition-colors focus:outline-none"
+            className="border-marine-100 bg-sand-50 text-marine-900 focus:border-marine-500 w-full appearance-none rounded-xl border px-4 py-3 pr-10 text-sm font-medium transition-colors"
           >
             {allVehicles.map((v) => (
               <option key={v.id} value={v.id}>

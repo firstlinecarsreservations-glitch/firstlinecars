@@ -35,7 +35,7 @@ export default async function VehiclesPage({ params }: VehiclesPageProps) {
   const vehicles = getAllVehicles();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 pt-28 pb-16 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-[90rem] px-6 pt-28 pb-16 sm:px-10">
       <div className="max-w-2xl">
         <h1 className="font-display text-marine-900 text-4xl font-bold">
           {dict.vehiclesPage.title}

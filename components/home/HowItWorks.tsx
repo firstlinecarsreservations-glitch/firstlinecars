@@ -57,7 +57,7 @@ export function HowItWorks({ locale }: HowItWorksProps) {
   const content = CONTENT[locale];
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-[90rem] px-6 py-24 sm:px-10">
       <Reveal>
         <h2 className="font-display text-marine-900 text-center text-3xl font-bold">
           {content.title}

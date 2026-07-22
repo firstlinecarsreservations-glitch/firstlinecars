@@ -46,8 +46,12 @@
       "diesel": "Diesel",
       "essence": "Petrol",
       "hybrid": "Hybrid",
-      "reset": "Reset"
+      "reset": "Reset filters"
     },
+    "searchLabel": "Search vehicles",
+    "searchPlaceholder": "Search a model or brand...",
+    "resultsSingular": "vehicle available",
+    "resultsPlural": "vehicles available",
     "noResults": "No vehicle matches these filters."
   },
   "vehicleCard": {

@@ -55,7 +55,7 @@ export function Header({ locale }: HeaderProps) {
          l'impression de "resserrement" élégant plutôt qu'un simple
          changement de couleur brutal. */}
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between px-6 transition-[padding] duration-500 sm:px-10 ${
+        className={`mx-auto flex max-w-[90rem] items-center justify-between px-6 transition-[padding] duration-500 sm:px-10 ${
           transparent ? "py-7" : "py-4"
         }`}
       >

@@ -164,7 +164,7 @@ export function LocationSelector({
                 ? "Hotel name, street..."
                 : "Nom de l'hôtel, rue..."
             }
-            className="border-marine-100 focus:border-marine-500 w-full rounded-xl border px-4 py-3 text-sm focus:outline-none"
+            className="border-marine-100 focus:border-marine-500 w-full rounded-xl border px-4 py-3 text-sm"
           />
           {addressError && (
             <p

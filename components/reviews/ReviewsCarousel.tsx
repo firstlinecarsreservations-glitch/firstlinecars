@@ -37,7 +37,7 @@ export function ReviewsCarousel({
   }
 
   return (
-    <section id="avis" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section id="avis" className="mx-auto max-w-[90rem] px-6 py-20 sm:px-10">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
         <div>
           {title && (

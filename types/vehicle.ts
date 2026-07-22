@@ -19,4 +19,6 @@ export interface VehicleFilters {
   brand?: string;
   transmission?: Transmission;
   fuel?: FuelType;
+  /** Recherche libre sur la marque et le modèle. */
+  search?: string;
 }

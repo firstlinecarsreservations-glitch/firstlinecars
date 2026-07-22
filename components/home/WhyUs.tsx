@@ -69,8 +69,8 @@ export function WhyUs({ locale }: WhyUsProps) {
   const content = CONTENT[locale];
 
   return (
-    <section className="bg-sand-50 py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="bg-sand-100 py-24">
+      <div className="mx-auto max-w-[90rem] px-6 sm:px-10">
         <Reveal>
           <h2 className="font-display text-marine-900 text-center text-3xl font-bold">
             {content.title}

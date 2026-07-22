@@ -22,9 +22,10 @@ interface ButtonAsButton extends ButtonBaseProps {
   disabled?: boolean;
 }
 
+// Les boutons ne portent pas d'ombre : un aplat de couleur pleine se
+// détache déjà du fond, et l'ombre ajoutait un relief inutile.
 const VARIANT_CLASSES: Record<Variant, string> = {
-  primary:
-    "bg-amber-500 text-ink hover:bg-amber-600 shadow-card hover:shadow-card-hover",
+  primary: "bg-amber-500 text-ink hover:bg-amber-600",
   secondary: "bg-marine-700 text-white hover:bg-marine-900",
   ghost: "bg-transparent text-marine-700 hover:bg-marine-50",
 };

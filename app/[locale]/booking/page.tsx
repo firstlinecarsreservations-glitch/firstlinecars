@@ -25,7 +25,7 @@ export default async function BookingPage({
   if (!initialVehicle) notFound();
 
   return (
-    <section className="mx-auto max-w-6xl px-6 pt-32 pb-24 sm:px-10">
+    <section className="mx-auto max-w-[80rem] px-6 pt-32 pb-24 sm:px-10">
       <p className="text-xs font-semibold tracking-[0.25em] text-amber-500 uppercase">
         {locale === "en" ? "Booking" : "Réservation"}
       </p>

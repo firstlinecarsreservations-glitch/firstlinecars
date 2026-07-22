@@ -87,7 +87,7 @@ export function BookingForm({ vehicle, locale }: BookingFormProps) {
   }
 
   const inputClasses =
-    "w-full rounded-xl border border-marine-100 bg-white px-4 py-3 text-sm text-marine-900 transition-colors placeholder:text-ink-soft/50 focus:border-marine-500 focus:outline-none";
+    "w-full rounded-xl border border-marine-100 bg-white px-4 py-3 text-sm text-marine-900 transition-colors placeholder:text-ink-soft/50 focus:border-marine-500";
   const labelClasses =
     "mb-2 block text-xs font-semibold uppercase tracking-wide text-ink-soft";
 

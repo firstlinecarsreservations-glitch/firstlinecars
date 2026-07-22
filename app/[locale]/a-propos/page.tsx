@@ -144,8 +144,8 @@ export default async function AboutPage({ params }: AboutPageProps) {
         </Reveal>
       </section>
 
-      <section className="bg-sand-50 py-20">
-        <div className="mx-auto max-w-6xl px-6 sm:px-10">
+      <section className="bg-sand-100 py-20">
+        <div className="mx-auto max-w-[80rem] px-6 sm:px-10">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {content.values.map((value, index) => {
               const Icon = value.icon;
