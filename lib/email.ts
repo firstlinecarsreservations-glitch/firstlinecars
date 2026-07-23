@@ -98,6 +98,7 @@ function buildRows({ data, vehicle, estimate }: BookingEmailInput) {
     ["Total estimé", formatBoth(estimate.totalPriceMad)],
     ["Récupération", buildPickupLine(data)],
     ["Client", data.fullName],
+    ["Nationalité", data.nationality],
     ["Téléphone", data.phone],
     ["Email", data.email || "—"],
     ["Âge du conducteur", `${data.driverAge} ans`],

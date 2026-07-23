@@ -99,6 +99,13 @@ export function BookingForm({ vehicle, locale }: BookingFormProps) {
       autoComplete: "name",
     },
     {
+      name: "nationality" as const,
+      label: locale === "en" ? "Nationality" : "Nationalité",
+      type: "text",
+      autoComplete: "country-name",
+      placeholder: locale === "en" ? "e.g. French" : "ex. Française",
+    },
+    {
       name: "phone" as const,
       label: locale === "en" ? "Phone" : "Téléphone",
       type: "tel",

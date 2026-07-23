@@ -18,6 +18,7 @@ type SubmitStatus = "idle" | "loading" | "success" | "error";
 const MESSAGES = {
   fr: {
     nameTooShort: "Merci d'indiquer votre nom complet.",
+    nationalityRequired: "Merci d'indiquer votre nationalité.",
     phoneInvalid: "Numéro de téléphone invalide.",
     ageRequired: "Merci d'indiquer l'âge du conducteur.",
     ageTooYoung: "Le conducteur doit avoir au moins 21 ans.",
@@ -29,6 +30,7 @@ const MESSAGES = {
   },
   en: {
     nameTooShort: "Please enter your full name.",
+    nationalityRequired: "Please enter your nationality.",
     phoneInvalid: "Invalid phone number.",
     ageRequired: "Please enter the driver's age.",
     ageTooYoung: "The driver must be at least 21 years old.",
@@ -46,6 +48,7 @@ function buildSchema(locale: Locale) {
   return z
     .object({
       fullName: z.string().min(2, t.nameTooShort),
+      nationality: z.string().min(2, t.nationalityRequired),
       phone: z.string().min(6, t.phoneInvalid),
       // Un <input type="number"> renvoie une chaîne : la conversion se
       // fait à l'inscription du champ (valueAsNumber), pas via
@@ -102,6 +105,7 @@ export function useBookingForm(vehicle: Vehicle, locale: Locale) {
     resolver: zodResolver(schema),
     defaultValues: {
       fullName: "",
+      nationality: "",
       phone: "",
       // undefined plutôt que 0 : le champ s'affiche vide au lieu de
       // pré-remplir un âge que personne n'a saisi.
@@ -131,6 +135,7 @@ export function useBookingForm(vehicle: Vehicle, locale: Locale) {
         body: JSON.stringify({
           vehicleId: vehicle.id,
           fullName: values.fullName,
+          nationality: values.nationality,
           phone: values.phone,
           driverAge: values.driverAge,
           email: values.email,

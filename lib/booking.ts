@@ -16,6 +16,7 @@ export const bookingRequestSchema = z
   .object({
     vehicleId: z.string().min(1),
     fullName: z.string().min(2),
+    nationality: z.string().min(2),
     phone: z.string().min(6),
     driverAge: z.number().int().min(21).max(99),
     email: z.string().email().optional().or(z.literal("")),
