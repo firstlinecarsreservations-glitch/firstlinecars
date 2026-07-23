@@ -17,7 +17,7 @@ export const bookingRequestSchema = z
     vehicleId: z.string().min(1),
     fullName: z.string().min(2),
     phone: z.string().min(6),
-    licenseNumber: z.string().min(3),
+    driverAge: z.number().int().min(21).max(99),
     email: z.string().email().optional().or(z.literal("")),
     deliveryLocation: z.enum(["agency", "airport", "custom"]),
     airportCity: z.enum(["agadir", "marrakech"]).optional(),

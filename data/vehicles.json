@@ -4,47 +4,23 @@
     "brand": "Dacia",
     "model": "Logan",
     "category": "Berline",
-    "pricePerDayMad": 300,
+    "pricePerDayMad": 273,
     "transmission": "manual",
     "fuel": "diesel",
     "seats": 5,
-    "images": [
-      "/images/vehicles/dacia-logan-1.jpg",
-      "/images/vehicles/dacia-logan-2.jpg"
-    ],
-    "features": ["ac", "bluetooth", "cruiseControl"],
+    "images": ["/images/vehicules/dacia-logan.jpg"],
     "available": true
   },
   {
-    "id": "dacia-jogger",
-    "brand": "Dacia",
-    "model": "Jogger",
-    "category": "Familiale 7 places",
-    "pricePerDayMad": 450,
+    "id": "renault-clio-5",
+    "brand": "Renault",
+    "model": "Clio 5",
+    "category": "Citadine",
+    "pricePerDayMad": 305,
     "transmission": "manual",
     "fuel": "diesel",
-    "seats": 7,
-    "images": [
-      "/images/vehicles/dacia-jogger-1.jpg",
-      "/images/vehicles/dacia-jogger-2.jpg"
-    ],
-    "features": ["ac", "sevenSeats", "bigTrunk"],
-    "available": true
-  },
-  {
-    "id": "dacia-duster",
-    "brand": "Dacia",
-    "model": "Duster",
-    "category": "SUV",
-    "pricePerDayMad": 500,
-    "transmission": "automatic",
-    "fuel": "diesel",
     "seats": 5,
-    "images": [
-      "/images/vehicles/dacia-duster-1.jpg",
-      "/images/vehicles/dacia-duster-2.jpg"
-    ],
-    "features": ["fourByTwo", "autoClimate", "rearCamera"],
+    "images": ["/images/vehicules/clio5.jpg"],
     "available": true
   },
   {
@@ -52,31 +28,11 @@
     "brand": "Peugeot",
     "model": "208",
     "category": "Citadine",
-    "pricePerDayMad": 320,
+    "pricePerDayMad": 305,
     "transmission": "manual",
-    "fuel": "essence",
+    "fuel": "diesel",
     "seats": 5,
-    "images": [
-      "/images/vehicles/peugeot-208-1.jpg",
-      "/images/vehicles/peugeot-208-2.jpg"
-    ],
-    "features": ["ac", "bluetooth", "lowConsumption"],
-    "available": true
-  },
-  {
-    "id": "vw-troc",
-    "brand": "Volkswagen",
-    "model": "T-Roc",
-    "category": "SUV Premium",
-    "pricePerDayMad": 750,
-    "transmission": "automatic",
-    "fuel": "essence",
-    "seats": 5,
-    "images": [
-      "/images/vehicles/vw-t-roc-1.jpg",
-      "/images/vehicles/vw-t-roc-2.jpg"
-    ],
-    "features": ["automatic", "panoramicRoof", "parkAssist"],
+    "images": ["/images/vehicules/peugeot-208.jpg"],
     "available": true
   },
   {
@@ -84,15 +40,155 @@
     "brand": "Hyundai",
     "model": "Accent",
     "category": "Berline",
-    "pricePerDayMad": 330,
+    "pricePerDayMad": 327,
     "transmission": "automatic",
     "fuel": "essence",
     "seats": 5,
-    "images": [
-      "/images/vehicles/hyundai-accent-1.jpg",
-      "/images/vehicles/hyundai-accent-2.jpg"
-    ],
-    "features": ["automatic", "ac", "touchscreen"],
+    "images": ["/images/vehicules/hyundai-accent.jpg"],
+    "available": true
+  },
+  {
+    "id": "renault-clio-5-auto",
+    "brand": "Renault",
+    "model": "Clio 5 Automatique",
+    "category": "Citadine",
+    "pricePerDayMad": 327,
+    "transmission": "automatic",
+    "fuel": "essence",
+    "seats": 5,
+    "images": ["/images/vehicules/clio5.jpg"],
+    "available": true
+  },
+  {
+    "id": "dacia-duster",
+    "brand": "Dacia",
+    "model": "Duster",
+    "category": "SUV",
+    "pricePerDayMad": 382,
+    "transmission": "manual",
+    "fuel": "diesel",
+    "seats": 5,
+    "images": ["/images/vehicules/dacia-duster.jpg"],
+    "available": true
+  },
+  {
+    "id": "vw-t-roc",
+    "brand": "Volkswagen",
+    "model": "T-Roc",
+    "category": "SUV",
+    "pricePerDayMad": 654,
+    "transmission": "automatic",
+    "fuel": "essence",
+    "seats": 5,
+    "images": ["/images/vehicules/vw-troc.jpg"],
+    "available": true
+  },
+  {
+    "id": "audi-a3",
+    "brand": "Audi",
+    "model": "A3",
+    "category": "Berline premium",
+    "pricePerDayMad": 981,
+    "transmission": "automatic",
+    "fuel": "essence",
+    "seats": 5,
+    "images": ["/images/vehicules/audi-a3.jpg"],
+    "available": true
+  },
+  {
+    "id": "vw-touareg",
+    "brand": "Volkswagen",
+    "model": "Touareg",
+    "category": "SUV premium",
+    "pricePerDayMad": 1036,
+    "transmission": "automatic",
+    "fuel": "diesel",
+    "seats": 5,
+    "images": ["/images/vehicules/vw-touareg.jpg"],
+    "available": true
+  },
+  {
+    "id": "mercedes-classe-a",
+    "brand": "Mercedes",
+    "model": "Classe A",
+    "category": "Berline premium",
+    "pricePerDayMad": 1090,
+    "transmission": "automatic",
+    "fuel": "essence",
+    "seats": 5,
+    "images": ["/images/vehicules/classe-a.jpg"],
+    "available": true
+  },
+  {
+    "id": "porsche-macan",
+    "brand": "Porsche",
+    "model": "Macan",
+    "category": "SUV premium",
+    "pricePerDayMad": 1853,
+    "transmission": "automatic",
+    "fuel": "essence",
+    "seats": 5,
+    "images": ["/images/vehicules/porshe-macan.jpg"],
+    "available": true
+  },
+  {
+    "id": "hyundai-i10",
+    "brand": "Hyundai",
+    "model": "i10",
+    "category": "Citadine",
+    "pricePerDayMad": 218,
+    "transmission": "manual",
+    "fuel": "essence",
+    "seats": 5,
+    "images": ["/images/vehicules/hyundai-i10.jpg"],
+    "available": true
+  },
+  {
+    "id": "kia-picanto",
+    "brand": "Kia",
+    "model": "Picanto",
+    "category": "Citadine",
+    "pricePerDayMad": 218,
+    "transmission": "manual",
+    "fuel": "essence",
+    "seats": 5,
+    "images": ["/images/vehicules/kia-picanto.jpeg"],
+    "available": true
+  },
+  {
+    "id": "dacia-sandero",
+    "brand": "Dacia",
+    "model": "Sandero",
+    "category": "Citadine",
+    "pricePerDayMad": 240,
+    "transmission": "manual",
+    "fuel": "diesel",
+    "seats": 5,
+    "images": ["/images/vehicules/dacia-sandero.jpg"],
+    "available": true
+  },
+  {
+    "id": "hyundai-grand-i10",
+    "brand": "Hyundai",
+    "model": "Grand i10",
+    "category": "Citadine",
+    "pricePerDayMad": 240,
+    "transmission": "manual",
+    "fuel": "essence",
+    "seats": 5,
+    "images": ["/images/vehicules/hyundai-grand-i10.png"],
+    "available": true
+  },
+  {
+    "id": "fiat-500",
+    "brand": "Fiat",
+    "model": "500",
+    "category": "Citadine",
+    "pricePerDayMad": 305,
+    "transmission": "manual",
+    "fuel": "essence",
+    "seats": 4,
+    "images": ["/images/vehicules/fiat-500.jpg"],
     "available": true
   }
 ]

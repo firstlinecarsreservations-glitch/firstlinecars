@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FirstLineCars
 
-## Getting Started
+Site vitrine de **FirstLineCars**, agence de location de voiture à Agadir et
+à l'aéroport Agadir Al Massira (Maroc).
 
-First, run the development server:
+Bilingue français / anglais, avec catalogue de véhicules, formulaire de
+réservation envoyé par email, et affichage des prix en dirhams ou en euros.
+
+## Stack
+
+| | |
+|---|---|
+| Framework | Next.js 16 (App Router, React Server Components) |
+| UI | React 19, Tailwind CSS v4, framer-motion |
+| Formulaires | react-hook-form + zod |
+| Email | Resend |
+| Langage | TypeScript (strict) |
+
+## Démarrer
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Renseigner `RESEND_API_KEY` dans `.env.local`, puis ouvrir
+http://localhost:3000 — la racine redirige vers `/fr` ou `/en` selon la
+langue du navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables d'environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Liste complète et commentée dans [`.env.example`](.env.example).
 
-## Learn More
+| Variable | Obligatoire | Rôle |
+|---|---|---|
+| `RESEND_API_KEY` | oui | Envoi des demandes de réservation. Sans elle, le formulaire répond 502. |
+| `BOOKING_EMAIL_TO` | non | Destinataire des demandes. Défaut : `firstlinecars.reservations@gmail.com` |
+| `BOOKING_EMAIL_FROM` | non | Expéditeur. Défaut `onboarding@resend.dev`, qui ne peut écrire qu'à l'adresse du compte Resend tant qu'aucun domaine n'est vérifié. |
+| `NEXT_PUBLIC_SITE_URL` | non | URL canonique, utilisée par le sitemap et les métadonnées. |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | non | Numéro des liens WhatsApp, format international sans `+`. |
+| `NEXT_PUBLIC_EUR_MAD_EXCHANGE_RATE` | non | Taux de conversion MAD → EUR. Défaut : `10.9`. |
 
-To learn more about Next.js, take a look at the following resources:
+## Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/[locale]/          Pages : accueil, véhicules, réservation, à propos, contact
+app/api/booking/       Réception du formulaire, validation, envoi de l'email
+components/            UI par domaine : booking, home, layout, reviews, ui, vehicles
+data/*.json            Contenu éditorial : véhicules, destinations, FAQ, avis
+lib/                   Métier : i18n, devise, prix, email, WhatsApp, business
+locales/{fr,en}.json   Dictionnaires de traduction
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Conventions qui expliquent la structure :
 
-## Deploy on Vercel
+- **Le contenu vit en JSON, pas en dur dans les composants.** Modifier la
+  flotte ou les destinations ne demande pas de toucher au JSX.
+- **Les prix sont stockés en dirhams** (`pricePerDayMad`) et convertis à
+  l'affichage. La devise choisie vit dans un cookie lu côté serveur, ce
+  qui évite que les prix changent visiblement après le chargement.
+- **`lib/business.ts` est la source unique** des informations réelles de
+  l'agence : adresse, téléphone, note Google, réseaux sociaux. Rien
+  d'affiché comme un fait ne doit être écrit ailleurs.
+- **Langue par défaut : français**, détectée par cookie puis
+  `Accept-Language` dans `middleware.ts`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Déploiement (Vercel)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Importer le dépôt dans Vercel — le framework est détecté automatiquement.
+2. Ajouter les variables d'environnement ci-dessus dans
+   *Project Settings → Environment Variables*.
+3. Déployer.
+
+`.env.local` n'est jamais commité : les valeurs de production se
+configurent uniquement côté Vercel.
+
+## Scripts
+
+```bash
+npm run dev      # développement
+npm run build    # build de production
+npm run start    # servir le build
+npm run lint     # ESLint
+```
+
+## À faire
+
+- Vérifier le domaine chez Resend pour pouvoir envoyer depuis
+  `reservations@firstlinecars.ma` — nécessaire pour écrire aux clients.
+- Remplacer les avis de démonstration de `data/reviews.json` par les vrais
+  avis Google. La note (4,7) et le nombre (50+) affichés viennent déjà de
+  `lib/business.ts` et sont réels.
+- Remplacer l'URL de la fiche Google dans `lib/business.ts` par le lien
+  canonique (Google Maps → Partager).
+- Réduire le poids de `public/images/vehicules/hyundai-grand-i10.png`
+  (7 Mo) et de `public/flc_logo_nobg.png` (0,9 Mo).

@@ -17,16 +17,30 @@ export function VehicleCard({ vehicle, locale }: VehicleCardProps) {
   const dict = getDictionary(locale);
   const bookingHref = `/${locale}/booking?carId=${vehicle.id}`;
 
-  const transmissionLabel =
-    vehicle.transmission === "automatic"
-      ? dict.vehiclesPage.filters.automatic
-      : dict.vehiclesPage.filters.manual;
-  const fuelLabel = dict.vehiclesPage.filters[vehicle.fuel];
+  const isAutomatic = vehicle.transmission === "automatic";
 
+  // `short` est affiché (les tuiles sont étroites), `spoken` est lu par
+  // les lecteurs d'écran, pour qui "Manu" seul ne veut rien dire.
   const specs = [
-    { icon: Gauge, label: transmissionLabel },
-    { icon: Fuel, label: fuelLabel },
-    { icon: Users, label: `${vehicle.seats} ${dict.vehicleCard.seats}` },
+    {
+      icon: Gauge,
+      short: isAutomatic
+        ? dict.vehicleCard.automaticShort
+        : dict.vehicleCard.manualShort,
+      spoken: isAutomatic
+        ? dict.vehiclesPage.filters.automatic
+        : dict.vehiclesPage.filters.manual,
+    },
+    {
+      icon: Fuel,
+      short: dict.vehiclesPage.filters[vehicle.fuel],
+      spoken: dict.vehiclesPage.filters[vehicle.fuel],
+    },
+    {
+      icon: Users,
+      short: `${vehicle.seats} ${dict.vehicleCard.seatsShort}`,
+      spoken: `${vehicle.seats} ${dict.vehicleCard.seats}`,
+    },
   ];
 
   return (
@@ -65,26 +79,32 @@ export function VehicleCard({ vehicle, locale }: VehicleCardProps) {
           </div>
         </div>
 
-        {/* Grille de 3 colonnes égales plutôt qu'un flex-wrap : une
-           caractéristique longue ("Automatique") faisait passer la
-           troisième à la ligne sur certaines cartes seulement, et les
-           cartes d'une même rangée n'avaient plus la même hauteur de
-           contenu. Ici la ligne est toujours unique. */}
-        <ul className="text-ink-soft mt-5 grid grid-cols-3 gap-x-2 text-[13px]">
+        {/* Trois tuiles de largeur égale, contenu centré. Les tentatives
+           précédentes traitaient les caractéristiques comme du texte
+           libre : en flex groupé à gauche l'espace restait à droite, en
+           grid le mot "Automatique" débordait de sa colonne sur l'icône
+           voisine. Ici chaque tuile fait exactement un tiers, l'écart
+           est identique partout et rien ne peut se chevaucher. */}
+        <ul className="mt-5 grid grid-cols-3 gap-2.5">
           {specs.map((spec) => {
             const Icon = spec.icon;
             return (
               <li
-                key={spec.label}
-                title={spec.label}
-                className="flex min-w-0 items-center gap-1.5"
+                key={spec.spoken}
+                className="bg-marine-50 flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3.5"
               >
                 <Icon
-                  className="text-marine-500 h-4 w-4 shrink-0"
+                  className="text-marine-500 h-5 w-5"
                   aria-hidden="true"
                   strokeWidth={1.75}
                 />
-                <span className="truncate">{spec.label}</span>
+                <span
+                  aria-hidden="true"
+                  className="text-marine-900 text-[11px] font-bold tracking-[0.06em] uppercase"
+                >
+                  {spec.short}
+                </span>
+                <span className="sr-only">{spec.spoken}</span>
               </li>
             );
           })}

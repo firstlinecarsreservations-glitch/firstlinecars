@@ -11,7 +11,6 @@ export interface Vehicle {
   fuel: FuelType;
   seats: number;
   images: string[];
-  features: string[];
   available: boolean;
 }
 

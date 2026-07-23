@@ -2,7 +2,13 @@ import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { BUSINESS, SOCIAL } from "@/lib/business";
-import { InstagramIcon, TikTokIcon } from "@/components/ui/SocialIcons";
+import {
+  InstagramIcon,
+  TikTokIcon,
+  FacebookIcon,
+  SnapchatIcon,
+} from "@/components/ui/SocialIcons";
+import { Logo } from "@/components/ui/Logo";
 
 interface FooterProps {
   locale: Locale;
@@ -20,13 +26,18 @@ export function Footer({ locale }: FooterProps) {
     { href: `/${locale}/contact`, label: dict.nav.contact },
   ];
 
+  const socialLinks = [
+    { href: SOCIAL.instagram, label: "Instagram", Icon: InstagramIcon },
+    { href: SOCIAL.facebook, label: "Facebook", Icon: FacebookIcon },
+    { href: SOCIAL.tiktok, label: "TikTok", Icon: TikTokIcon },
+    { href: SOCIAL.snapchat, label: "Snapchat", Icon: SnapchatIcon },
+  ];
+
   return (
     <footer className="border-marine-100 bg-marine-900 text-marine-100 border-t">
       <div className="mx-auto grid max-w-[90rem] gap-10 px-6 py-14 sm:px-10 md:grid-cols-3">
         <div>
-          <p className="font-display text-lg font-bold text-white">
-            First<span className="text-amber-400">Line</span>Cars
-          </p>
+          <Logo height={40} onDark />
           <p className="text-marine-300 mt-3 flex items-start gap-2 text-sm">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
             {BUSINESS.address}
@@ -59,28 +70,23 @@ export function Footer({ locale }: FooterProps) {
 
         <div>
           <p className="font-display text-sm font-semibold tracking-wide text-amber-400 uppercase">
-            Instagram / TikTok
+            {locale === "en" ? "Follow us" : "Suivez-nous"}
           </p>
-          <div className="mt-3 flex gap-3">
-            <a
-              href={SOCIAL.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram FirstLineCars"
-              className="bg-marine-700 hover:bg-marine-600 rounded-full p-2.5 transition-colors"
-            >
-              <InstagramIcon className="h-4 w-4" />
-            </a>
-            <a
-              href={SOCIAL.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TikTok FirstLineCars"
-              className="bg-marine-700 hover:bg-marine-600 rounded-full p-2.5 transition-colors"
-            >
-              <TikTokIcon className="h-4 w-4" />
-            </a>
-          </div>
+          <ul className="mt-3 flex flex-wrap gap-3">
+            {socialLinks.map(({ href, label, Icon }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${label} FirstLineCars`}
+                  className="bg-marine-700 hover:bg-marine-600 inline-flex rounded-full p-2.5 transition-colors"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 

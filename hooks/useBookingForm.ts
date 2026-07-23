@@ -19,7 +19,9 @@ const MESSAGES = {
   fr: {
     nameTooShort: "Merci d'indiquer votre nom complet.",
     phoneInvalid: "Numéro de téléphone invalide.",
-    licenseRequired: "Numéro de permis requis.",
+    ageRequired: "Merci d'indiquer l'âge du conducteur.",
+    ageTooYoung: "Le conducteur doit avoir au moins 21 ans.",
+    ageTooOld: "Merci de vérifier l'âge saisi.",
     emailInvalid: "Adresse email invalide.",
     datesRequired: "Merci de sélectionner vos dates de location.",
     addressRequired: "Merci d'indiquer l'adresse de livraison.",
@@ -28,7 +30,9 @@ const MESSAGES = {
   en: {
     nameTooShort: "Please enter your full name.",
     phoneInvalid: "Invalid phone number.",
-    licenseRequired: "Driving licence number is required.",
+    ageRequired: "Please enter the driver's age.",
+    ageTooYoung: "The driver must be at least 21 years old.",
+    ageTooOld: "Please check the age entered.",
     emailInvalid: "Invalid email address.",
     datesRequired: "Please select your rental dates.",
     addressRequired: "Please enter the delivery address.",
@@ -43,7 +47,15 @@ function buildSchema(locale: Locale) {
     .object({
       fullName: z.string().min(2, t.nameTooShort),
       phone: z.string().min(6, t.phoneInvalid),
-      licenseNumber: z.string().min(3, t.licenseRequired),
+      // Un <input type="number"> renvoie une chaîne : la conversion se
+      // fait à l'inscription du champ (valueAsNumber), pas via
+      // z.coerce — celui-ci rendrait le type d'entrée du schéma
+      // `unknown` et casserait le typage du resolver.
+      driverAge: z
+        .number({ message: t.ageRequired })
+        .int(t.ageRequired)
+        .min(21, t.ageTooYoung)
+        .max(99, t.ageTooOld),
       email: z.string().email(t.emailInvalid).optional().or(z.literal("")),
       deliveryLocation: z.enum(["agency", "airport", "custom"]),
       airportCity: z.enum(["agadir", "marrakech"]).optional(),
@@ -91,7 +103,9 @@ export function useBookingForm(vehicle: Vehicle, locale: Locale) {
     defaultValues: {
       fullName: "",
       phone: "",
-      licenseNumber: "",
+      // undefined plutôt que 0 : le champ s'affiche vide au lieu de
+      // pré-remplir un âge que personne n'a saisi.
+      driverAge: undefined,
       email: "",
       deliveryLocation: "agency",
       airportCity: undefined,
@@ -118,7 +132,7 @@ export function useBookingForm(vehicle: Vehicle, locale: Locale) {
           vehicleId: vehicle.id,
           fullName: values.fullName,
           phone: values.phone,
-          licenseNumber: values.licenseNumber,
+          driverAge: values.driverAge,
           email: values.email,
           deliveryLocation: values.deliveryLocation,
           airportCity:

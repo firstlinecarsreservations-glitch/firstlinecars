@@ -8,6 +8,7 @@ import { getDictionary, type Locale } from "@/lib/i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CurrencySwitcher } from "./CurrencySwitcher";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/ui/Logo";
 
 interface HeaderProps {
   locale: Locale;
@@ -55,17 +56,12 @@ export function Header({ locale }: HeaderProps) {
          l'impression de "resserrement" élégant plutôt qu'un simple
          changement de couleur brutal. */}
       <div
-        className={`mx-auto flex max-w-[90rem] items-center justify-between px-6 transition-[padding] duration-500 sm:px-10 ${
+        className={`mx-auto flex max-w-360 items-center justify-between px-6 transition-[padding] duration-500 sm:px-10 ${
           transparent ? "py-7" : "py-4"
         }`}
       >
-        <Link
-          href={`/${locale}`}
-          className={`font-display text-lg font-semibold tracking-tight transition-colors ${
-            transparent ? "text-white" : "text-marine-900"
-          }`}
-        >
-          First<span className="text-amber-400">Line</span>Cars
+        <Link href={`/${locale}`} className="flex items-center">
+          <Logo height={40} onDark={transparent} priority />
         </Link>
 
         <nav className="hidden items-center gap-11 lg:flex">

@@ -12,7 +12,6 @@ const vehicleSchema = z.object({
   fuel: z.enum(["diesel", "essence", "hybrid"]),
   seats: z.number().int().positive(),
   images: z.array(z.string()).min(1),
-  features: z.array(z.string()),
   available: z.boolean(),
 });
 

@@ -5,7 +5,6 @@ import { ChevronDown } from "lucide-react";
 import { useCurrency } from "@/hooks/useCurrency";
 import { PriceTag } from "@/components/ui/PriceTag";
 import { VehicleImage } from "@/components/ui/VehicleImage";
-import { translateFeature } from "@/lib/vehicleFeatures";
 import type { Vehicle } from "@/types/vehicle";
 import type { Locale } from "@/lib/i18n";
 
@@ -80,16 +79,6 @@ export function BookingSummary({
         </div>
       </div>
 
-      <ul className="border-marine-100 mt-6 flex flex-wrap gap-2 border-t pt-6">
-        {vehicle.features.slice(0, 4).map((featureKey) => (
-          <li
-            key={featureKey}
-            className="bg-marine-50 text-marine-700 rounded-full px-3 py-1 text-xs font-medium"
-          >
-            {translateFeature(featureKey, locale)}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

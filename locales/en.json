@@ -16,8 +16,8 @@
     "description": "Insurance, deposit, mileage, airport delivery, payment methods: find every answer you need before booking."
   },
   "hero": {
-    "title": "Your ideal car to discover Agadir and Morocco",
-    "description": "Recent, well-maintained vehicles, insurance included, deposit-free rentals available, 24/7 assistance, delivery anywhere.",
+    "title": "First Line Cars, car rental agency in Agadir",
+    "description": "Cheap car rental in Agadir and at Agadir Airport from €20/day. Recent vehicles, insurance included and airport pickup on arrival — the best prices to explore Morocco at your own pace.",
     "ctaBook": "Book a car",
     "ctaWhatsapp": "Contact on WhatsApp",
     "statReviews": "4.7/5 across 50+ Google reviews",
@@ -56,6 +56,9 @@
   },
   "vehicleCard": {
     "seats": "seats",
+    "seatsShort": "seats",
+    "automaticShort": "Auto",
+    "manualShort": "Manual",
     "book": "Book",
     "whatsapp": "WhatsApp"
   },

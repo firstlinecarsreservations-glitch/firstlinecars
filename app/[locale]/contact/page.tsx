@@ -4,7 +4,12 @@ import { isValidLocale, DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 import { BUSINESS, SOCIAL } from "@/lib/business";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { Reveal } from "@/components/ui/Reveal";
-import { InstagramIcon } from "@/components/ui/SocialIcons";
+import {
+  InstagramIcon,
+  TikTokIcon,
+  FacebookIcon,
+  SnapchatIcon,
+} from "@/components/ui/SocialIcons";
 
 interface ContactPageProps {
   params: Promise<{ locale: string }>;
@@ -131,14 +136,26 @@ export default async function ContactPage({ params }: ContactPageProps) {
             <p className="font-display text-marine-900 mt-5 font-semibold">
               {locale === "en" ? "Follow us" : "Suivez-nous"}
             </p>
-            <a
-              href={SOCIAL.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-marine-700 mt-1.5 inline-block text-sm underline underline-offset-2"
-            >
-              Instagram
-            </a>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {[
+                { href: SOCIAL.instagram, label: "Instagram", Icon: InstagramIcon },
+                { href: SOCIAL.facebook, label: "Facebook", Icon: FacebookIcon },
+                { href: SOCIAL.tiktok, label: "TikTok", Icon: TikTokIcon },
+                { href: SOCIAL.snapchat, label: "Snapchat", Icon: SnapchatIcon },
+              ].map(({ href, label, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${label} FirstLineCars`}
+                    className="border-marine-100 text-marine-700 hover:border-marine-300 hover:text-marine-900 inline-flex rounded-full border p-2.5 transition-colors"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </Reveal>
       </div>

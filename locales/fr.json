@@ -16,8 +16,8 @@
     "description": "Assurance, caution, kilométrage, livraison aéroport, moyens de paiement : retrouvez toutes les réponses à vos questions avant de réserver."
   },
   "hero": {
-    "title": "Votre voiture idéale pour découvrir Agadir et le Maroc",
-    "description": "Véhicules récents et entretenus, assurance incluse, location possible sans caution, assistance disponible 24/7, livraison partout.",
+    "title": "First Line Cars, agence de location de voiture à Agadir",
+    "description": "Location de voiture pas chère à Agadir et à l'aéroport Al Massira, à partir de 20 €/jour. Véhicules récents, assurance incluse et livraison à votre arrivée : les meilleurs prix pour parcourir le Maroc en toute liberté.",
     "ctaBook": "Réserver une voiture",
     "ctaWhatsapp": "Contacter WhatsApp",
     "statReviews": "4,7/5 sur plus de 50 avis Google",
@@ -56,6 +56,9 @@
   },
   "vehicleCard": {
     "seats": "places",
+    "seatsShort": "pers",
+    "automaticShort": "Auto",
+    "manualShort": "Manu",
     "book": "Réserver",
     "whatsapp": "WhatsApp"
   },

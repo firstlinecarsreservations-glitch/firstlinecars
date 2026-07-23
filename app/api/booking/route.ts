@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { bookingRequestSchema, calculateEstimate } from "@/lib/booking";
 import { getVehicleById } from "@/lib/vehicles";
+import { sendBookingRequestEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
   // Un corps non-JSON fait lever request.json() : sans ce garde, une
@@ -32,9 +33,16 @@ export async function POST(request: Request) {
     vehicle.pricePerDayMad,
   );
 
-  // TODO production : envoyer un email (ex. Resend) à
-  // process.env.BOOKING_NOTIFICATION_EMAIL et/ou relayer vers une API
-  // WhatsApp Business, avec parsed.data + estimate.
+  // L'email EST la réservation : il n'y a pas de base de données derrière.
+  // Un échec d'envoi doit donc remonter au client — répondre "success"
+  // alors que personne n'a reçu la demande ferait disparaître le dossier
+  // sans que ni le client ni l'agence ne le sachent.
+  try {
+    await sendBookingRequestEmail({ data: parsed.data, vehicle, estimate });
+  } catch (error) {
+    console.error("[booking] échec de l'envoi de l'email", error);
+    return NextResponse.json({ error: "email_failed" }, { status: 502 });
+  }
 
   return NextResponse.json({ success: true, estimate }, { status: 200 });
 }

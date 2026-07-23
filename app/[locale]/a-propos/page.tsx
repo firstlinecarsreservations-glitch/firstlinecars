@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { ShieldCheck, Gauge, HeartHandshake, Star } from "lucide-react";
 import { isValidLocale, DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 import { Reveal } from "@/components/ui/Reveal";
@@ -14,11 +13,11 @@ const CONTENT = {
   fr: {
     eyebrow: "Notre histoire",
     title:
-      "Votre partenaire de confiance pour découvrir Agadir en toute liberté",
+      "First Line Cars, votre agence de location de voiture à Agadir",
     intro:
-      "FirstLineCars est une agence locale spécialisée dans la location de véhicules pour les touristes, les Marocains résidents à l'étranger, les voyageurs professionnels et tous ceux qui souhaitent explorer Agadir et ses environs.",
+      "First Line Cars est une agence locale de location de voiture à Agadir et à l'aéroport Agadir Al Massira. Nous accompagnons les touristes, les Marocains résidant à l'étranger et les voyageurs d'affaires avec un large choix de véhicules, de la citadine économique au SUV premium, à des tarifs parmi les plus compétitifs du Maroc.",
     mission:
-      "Notre objectif est d'éliminer les mauvaises expériences liées à la location de voiture : frais inattendus, démarches compliquées et manque de communication. Chaque véhicule, chaque échange, chaque livraison est pensé pour que vous n'ayez qu'une chose à faire : profiter de votre séjour.",
+      "Notre engagement : une location abordable sans mauvaise surprise. Prix affichés tout compris, assurance incluse, véhicules récents et entretenus, et livraison à l'aéroport comme à votre hôtel. Un service de qualité, pensé pour que vous n'ayez qu'une chose à faire : prendre la route.",
     values: [
       {
         icon: ShieldCheck,
@@ -49,11 +48,11 @@ const CONTENT = {
   },
   en: {
     eyebrow: "Our story",
-    title: "Your trusted partner to discover Agadir freely",
+    title: "First Line Cars, your car rental agency in Agadir",
     intro:
-      "FirstLineCars is a local agency specialised in car rental for tourists, Moroccans living abroad, business travellers and anyone exploring Agadir and its surroundings.",
+      "First Line Cars is a local car rental agency in Agadir and at Agadir Al Massira Airport. We serve tourists, Moroccans living abroad and business travellers with a wide selection of vehicles, from affordable city cars to premium SUVs, at some of the most competitive rates in Morocco.",
     mission:
-      "Our goal is to remove the bad experiences that come with car rental: unexpected fees, complicated procedures and poor communication. Every vehicle, every conversation, every delivery is designed so you only have one thing to do: enjoy your stay.",
+      "Our commitment: affordable car rental with no unpleasant surprises. All-inclusive pricing, insurance included, recent and well-maintained vehicles, and delivery to the airport or your hotel. Quality service, designed so you only have one thing to do: hit the road.",
     values: [
       {
         icon: ShieldCheck,
@@ -108,16 +107,16 @@ export default async function AboutPage({ params }: AboutPageProps) {
   return (
     <>
       <section className="bg-marine-900 relative overflow-hidden pt-36 pb-20 sm:pt-44 sm:pb-28">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero/agadir-coastline.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover opacity-25"
-          />
-          <div className="from-marine-900 via-marine-900/70 to-marine-900/30 absolute inset-0 bg-linear-to-t" />
-        </div>
+        {/* Même traitement que le Hero : aplat marine plus halo discret,
+           au lieu d'une photo de fond. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-1/2 left-1/2 h-[45rem] w-[45rem] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
+          style={{
+            background:
+              "radial-gradient(circle, #E2A63B 0%, rgba(226,166,59,0) 65%)",
+          }}
+        />
 
         <div className="relative mx-auto max-w-3xl px-6 text-center sm:px-10">
           <p className="text-xs font-semibold tracking-[0.3em] text-amber-400 uppercase">

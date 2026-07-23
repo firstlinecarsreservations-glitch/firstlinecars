@@ -63,13 +63,19 @@ export function VehicleCatalog({ vehicles, locale }: VehicleCatalogProps) {
           onReset={resetFilters}
         />
         <div>
-          {/* Compte annoncé aux lecteurs d'écran : la grille se mettait à
-             jour sans qu'aucun retour ne soit donné. */}
-          <p aria-live="polite" className="text-ink-soft mb-5 text-sm">
+          {/* Sert de titre à la grille, et annonce le résultat aux
+             lecteurs d'écran : la liste se mettait à jour sans qu'aucun
+             retour ne soit donné. */}
+          <p
+            aria-live="polite"
+            className="font-display text-marine-900 mb-6 text-xl font-bold tracking-tight"
+          >
             {filteredVehicles.length}{" "}
-            {filteredVehicles.length > 1
-              ? dict.vehiclesPage.resultsPlural
-              : dict.vehiclesPage.resultsSingular}
+            <span className="text-ink-soft text-base font-medium">
+              {filteredVehicles.length > 1
+                ? dict.vehiclesPage.resultsPlural
+                : dict.vehiclesPage.resultsSingular}
+            </span>
           </p>
           <VehicleGrid vehicles={filteredVehicles} locale={locale} />
         </div>

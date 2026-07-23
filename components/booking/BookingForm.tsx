@@ -105,10 +105,16 @@ export function BookingForm({ vehicle, locale }: BookingFormProps) {
       autoComplete: "tel",
     },
     {
-      name: "licenseNumber" as const,
-      label: locale === "en" ? "Driving licence number" : "Numéro de permis",
-      type: "text",
+      name: "driverAge" as const,
+      label: locale === "en" ? "Driver age" : "Âge du conducteur",
+      type: "number",
       autoComplete: "off",
+      placeholder: locale === "en" ? "e.g. 30" : "ex. 30",
+      // Le clavier numérique s'ouvre directement sur mobile, et les
+      // bornes correspondent à celles du schéma de validation.
+      inputMode: "numeric" as const,
+      min: 21,
+      max: 99,
     },
   ];
 
@@ -129,10 +135,17 @@ export function BookingForm({ vehicle, locale }: BookingFormProps) {
                 {field.label}
               </label>
               <input
-                {...register(field.name)}
+                {...register(
+                  field.name,
+                  field.type === "number" ? { valueAsNumber: true } : undefined,
+                )}
                 id={`${fieldId}-${field.name}`}
                 type={field.type}
                 autoComplete={field.autoComplete}
+                placeholder={field.placeholder}
+                inputMode={field.inputMode}
+                min={field.min}
+                max={field.max}
                 aria-invalid={Boolean(errors[field.name])}
                 aria-describedby={
                   errors[field.name] ? `${fieldId}-${field.name}-error` : undefined
