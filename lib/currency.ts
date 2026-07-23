@@ -1,7 +1,10 @@
 export type Currency = "MAD" | "EUR";
 
 export const SUPPORTED_CURRENCIES = ["MAD", "EUR"] as const;
-export const DEFAULT_CURRENCY: Currency = "MAD";
+// Devise affichée au premier chargement, tant que le visiteur n'a pas
+// choisi via le sélecteur (son choix est ensuite mémorisé en cookie). La
+// clientèle est majoritairement européenne, d'où l'euro par défaut.
+export const DEFAULT_CURRENCY: Currency = "EUR";
 
 /**
  * La devise est stockée dans un cookie plutôt qu'en localStorage : c'est le
