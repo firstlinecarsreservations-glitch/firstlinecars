@@ -42,7 +42,12 @@ export function Hero({ locale }: HeroProps) {
     // page ne dépend plus du chargement d'une grande image.
     <section
       ref={sectionRef}
-      className="bg-marine-900 relative flex h-svh min-h-160 flex-col overflow-hidden"
+      // min-h-svh plutôt que h-svh : sur mobile, le contenu (titre sur
+      // plusieurs lignes + description + deux boutons) est presque aussi
+      // haut que l'écran. Une hauteur fixe forçait le centrage vertical à
+      // faire passer le haut du titre SOUS le header fixe. Avec min-h, la
+      // section s'étire si besoin et rien ne se chevauche.
+      className="bg-marine-900 relative flex min-h-svh flex-col overflow-hidden"
     >
       {/* Halo ambré très discret : donne de la profondeur à l'aplat sans
          rien ajouter à charger. */}
@@ -57,7 +62,10 @@ export function Hero({ locale }: HeroProps) {
 
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
-        className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-6 text-center sm:px-10"
+        // Mobile : aligné en haut avec un dégagement fixe (pt-28) qui passe
+        // sous le header, plutôt que centré. Desktop (sm+) : centrage
+        // vertical inchangé, le contenu y tient largement.
+        className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-start px-6 pt-32 pb-10 text-center sm:justify-center sm:px-10 sm:pt-0 sm:pb-0"
       >
         <motion.span
           initial={{ opacity: 0, y: 10 }}
