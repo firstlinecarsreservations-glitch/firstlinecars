@@ -9,6 +9,7 @@ import {
 } from "@/lib/i18n";
 import { CURRENCY_COOKIE, parseCurrency } from "@/lib/currency";
 import { CurrencyProvider } from "@/hooks/useCurrency";
+import { ReservationProvider } from "@/hooks/useReservation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "../globals.css";
@@ -71,9 +72,11 @@ export default async function LocaleLayout({
     >
       <body>
         <CurrencyProvider initialCurrency={currency}>
-          <Header locale={locale} />
-          <main>{children}</main>
-          <Footer locale={locale} />
+          <ReservationProvider>
+            <Header locale={locale} />
+            <main>{children}</main>
+            <Footer locale={locale} />
+          </ReservationProvider>
         </CurrencyProvider>
       </body>
     </html>

@@ -38,6 +38,21 @@ export function Button(props: ButtonAsLink | ButtonAsButton) {
   const classes = `${BASE_CLASSES} ${VARIANT_CLASSES[variant]} ${className}`;
 
   if ("href" in props && props.href) {
+    // Un href externe (WhatsApp, http…) s'ouvre dans un nouvel onglet via une
+    // ancre native : next/link est réservé à la navigation interne. Le style
+    // reste rigoureusement identique dans les deux cas.
+    if (/^https?:\/\//.test(props.href)) {
+      return (
+        <a
+          href={props.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={classes}
+        >
+          {children}
+        </a>
+      );
+    }
     return (
       <Link href={props.href} className={classes}>
         {children}

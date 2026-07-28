@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { getDictionary, type Locale } from "@/lib/i18n";
-import { Button } from "@/components/ui/Button";
-import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { AnimatedHeading } from "@/components/ui/AnimatedHeading";
+import { ReservationSearch } from "@/components/booking/ReservationSearch";
+import { RESERVATION_SEARCH_ID } from "@/hooks/useReservation";
 
 interface HeroProps {
   locale: Locale;
@@ -23,11 +23,6 @@ export function Hero({ locale }: HeroProps) {
   });
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "8%"]);
-
-  const whatsappMessage =
-    locale === "en"
-      ? "Hello FirstLineCars, I'd like information about a car rental."
-      : "Bonjour FirstLineCars, je souhaite avoir des informations sur une location de voiture.";
 
   const stats = [
     dict.hero.statReviews,
@@ -62,10 +57,11 @@ export function Hero({ locale }: HeroProps) {
 
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
-        // Mobile : aligné en haut avec un dégagement fixe (pt-28) qui passe
-        // sous le header, plutôt que centré. Desktop (sm+) : centrage
-        // vertical inchangé, le contenu y tient largement.
-        className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-start px-6 pt-32 pb-10 text-center sm:justify-center sm:px-10 sm:pt-0 sm:pb-0"
+        // Contenu aligné en haut à TOUTES les tailles, avec un dégagement qui
+        // passe sous le header fixe. Le formulaire de recherche a rendu le
+        // bloc plus haut : un centrage vertical (ancien sm:justify-center)
+        // faisait alors remonter le sur-titre sous la barre de navigation.
+        className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-start px-6 pt-28 pb-12 text-center sm:px-10 sm:pt-36 sm:pb-16"
       >
         <motion.span
           initial={{ opacity: 0, y: 10 }}
@@ -91,19 +87,21 @@ export function Hero({ locale }: HeroProps) {
           {dict.hero.description}
         </motion.p>
 
+        {/* Le Hero collecte désormais l'intention de réservation plutôt que
+           de renvoyer vers la flotte : les dates saisies ici initient le
+           parcours et suivent l'utilisateur jusqu'à /vehicules puis /booking. */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.7, ease: EXPO_OUT }}
-          className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          className="mt-10 w-full max-w-4xl"
         >
-          <Button href={`/${locale}/vehicules`} variant="primary">
-            {dict.hero.ctaBook}
-          </Button>
-          <WhatsAppButton
-            message={whatsappMessage}
-            label={dict.hero.ctaWhatsapp}
-            variant="primary"
+          <ReservationSearch
+            id={RESERVATION_SEARCH_ID}
+            locale={locale}
+            variant="hero"
+            tone="dark"
+            className="rounded-2xl border border-white/15 bg-white/10 p-5 text-left backdrop-blur-md sm:p-6"
           />
         </motion.div>
       </motion.div>

@@ -3,14 +3,22 @@
 import { useId } from "react";
 import { useBookingForm } from "@/hooks/useBookingForm";
 import { LocationSelector } from "./LocationSelector";
-import { DateRangePicker } from "./DateRangePicker";
+import { ReservationDateFields } from "./ReservationDateFields";
 import { useCurrency } from "@/hooks/useCurrency";
 import type { Vehicle } from "@/types/vehicle";
+import type { BookingEstimate, ReservationDates } from "@/types/booking";
 import type { Locale } from "@/lib/i18n";
 
 interface BookingFormProps {
   vehicle: Vehicle;
   locale: Locale;
+  /** Dates partagées, pré-remplies depuis la recherche et éditables ici. */
+  dates: ReservationDates;
+  onDatesChange: (dates: ReservationDates) => void;
+  /** Estimation calculée par la page à partir des mêmes dates. */
+  estimate: BookingEstimate;
+  /** Vrai quand les dates sont complètes : conditionne l'affichage du total. */
+  hasDates: boolean;
 }
 
 interface FormSectionProps {
@@ -44,16 +52,16 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   );
 }
 
-export function BookingForm({ vehicle, locale }: BookingFormProps) {
-  const {
-    form,
-    onSubmit,
-    deliveryLocation,
-    dateRange,
-    estimate,
-    status,
-    startNewBooking,
-  } = useBookingForm(vehicle, locale);
+export function BookingForm({
+  vehicle,
+  locale,
+  dates,
+  onDatesChange,
+  estimate,
+  hasDates,
+}: BookingFormProps) {
+  const { form, onSubmit, deliveryLocation, status, dateError, startNewBooking } =
+    useBookingForm(vehicle, locale, dates);
 
   const { format } = useCurrency();
   const fieldId = useId();
@@ -219,19 +227,18 @@ export function BookingForm({ vehicle, locale }: BookingFormProps) {
         step="03"
         title={locale === "en" ? "Rental dates" : "Dates de location"}
       >
-        <DateRangePicker
-          range={dateRange}
-          onChange={(range) =>
-            setValue("dateRange", range, { shouldValidate: true })
-          }
+        {/* Pré-remplies depuis la recherche (Context), mais modifiables ici :
+           l'utilisateur ne ressaisit jamais ce qu'il a déjà indiqué, tout en
+           gardant la main s'il change d'avis. */}
+        <ReservationDateFields
+          value={dates}
+          onChange={onDatesChange}
           locale={locale}
+          columns={2}
         />
-        <FieldError
-          id={`${fieldId}-dates-error`}
-          message={errors.dateRange?.message}
-        />
+        <FieldError id={`${fieldId}-dates-error`} message={dateError} />
 
-        {estimate && (
+        {hasDates && (
           <div className="text-marine-900 mt-5 flex items-center justify-between rounded-xl bg-amber-50 px-5 py-4 text-sm">
             <span>
               {estimate.days}{" "}

@@ -1,15 +1,50 @@
 import { z } from "zod";
-import { differenceInCalendarDays } from "date-fns";
 import type { BookingEstimate } from "@/types/booking";
+import type { ReservationDates } from "@/types/booking";
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * Combine une date (`YYYY-MM-DD`) et une heure (`HH:mm`) en un objet Date.
+ * Retourne une Date invalide (isNaN) si l'un des deux est vide ou malformé —
+ * les appelants doivent donc valider avec `Number.isNaN(d.getTime())`.
+ */
+export function combineDateTime(date: string, time: string): Date {
+  if (!date) return new Date(NaN);
+  return new Date(`${date}T${time || "00:00"}`);
+}
+
+/**
+ * Source unique du calcul de prix de toute l'application (cartes de
+ * résultats, formulaire de réservation, route API). Chaque écran fournit ses
+ * propres dates, mais la logique de tarification n'existe qu'ici.
+ *
+ * Le nombre de jours facturés est le nombre de tranches de 24 h entamées,
+ * jamais moins de 1 : une prise et un retour le même jour restent facturés
+ * une journée, et une durée invalide ou inversée retombe sur 1 jour plutôt
+ * que d'afficher un total négatif ou NaN.
+ */
 export function calculateEstimate(
-  startDate: Date,
-  endDate: Date,
+  pickup: Date,
+  dropoff: Date,
   pricePerDayMad: number,
 ): BookingEstimate {
-  const rawDays = differenceInCalendarDays(endDate, startDate);
-  const days = Math.max(rawDays, 1);
+  const diffMs = dropoff.getTime() - pickup.getTime();
+  const days =
+    Number.isFinite(diffMs) && diffMs > 0 ? Math.ceil(diffMs / DAY_MS) : 1;
   return { days, totalPriceMad: days * pricePerDayMad };
+}
+
+/** Estimation directement à partir des 4 champs de réservation (dates+heures). */
+export function estimateFromReservation(
+  dates: ReservationDates,
+  pricePerDayMad: number,
+): BookingEstimate {
+  return calculateEstimate(
+    combineDateTime(dates.pickupDate, dates.pickupTime),
+    combineDateTime(dates.returnDate, dates.returnTime),
+    pricePerDayMad,
+  );
 }
 
 export const bookingRequestSchema = z

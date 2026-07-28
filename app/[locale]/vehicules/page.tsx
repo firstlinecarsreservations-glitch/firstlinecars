@@ -6,7 +6,7 @@ import {
   type Locale,
 } from "@/lib/i18n";
 import { getAllVehicles } from "@/lib/vehicles";
-import { VehicleCatalog } from "@/components/vehicles/VehicleCatalog";
+import { VehicleResults } from "@/components/vehicles/VehicleResults";
 
 interface VehiclesPageProps {
   params: Promise<{ locale: string }>;
@@ -44,7 +44,7 @@ export default async function VehiclesPage({ params }: VehiclesPageProps) {
       </div>
 
       <div className="mt-10">
-        <VehicleCatalog vehicles={vehicles} locale={locale} />
+        <VehicleResults vehicles={vehicles} locale={locale} />
       </div>
     </section>
   );

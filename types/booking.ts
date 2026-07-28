@@ -19,3 +19,20 @@ export interface BookingEstimate {
   days: number;
   totalPriceMad: number;
 }
+
+/**
+ * Dates et heures de location partagées entre le Hero, la page /vehicules et
+ * la page /booking. Stockées en chaînes plutôt qu'en Date pour être liées
+ * directement à des `<input type="date">` / `<input type="time">` sans
+ * conversion à chaque frappe.
+ */
+export interface ReservationDates {
+  /** `YYYY-MM-DD` */
+  pickupDate: string;
+  /** `HH:mm` */
+  pickupTime: string;
+  /** `YYYY-MM-DD` */
+  returnDate: string;
+  /** `HH:mm` */
+  returnTime: string;
+}

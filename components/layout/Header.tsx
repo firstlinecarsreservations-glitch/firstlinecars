@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { getDictionary, type Locale } from "@/lib/i18n";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CurrencySwitcher } from "./CurrencySwitcher";
 import { Button } from "@/components/ui/Button";
@@ -36,6 +37,14 @@ export function Header({ locale }: HeaderProps) {
   }, [pathname]);
 
   const transparent = isHome && !scrolled;
+
+  // « Réserver maintenant » ouvre une conversation WhatsApp plutôt que la
+  // flotte : c'est le canal de contact direct de l'agence.
+  const bookNowHref = buildWhatsAppLink(
+    locale === "en"
+      ? "Hello FirstLineCars, I'd like to book a car."
+      : "Bonjour FirstLineCars, je souhaite réserver une voiture.",
+  );
 
   const navItems = [
     { href: `/${locale}/vehicules`, label: dict.nav.vehicles },
@@ -91,7 +100,7 @@ export function Header({ locale }: HeaderProps) {
             <CurrencySwitcher light={transparent} />
           </div>
           <Button
-            href={`/${locale}/vehicules`}
+            href={bookNowHref}
             variant="primary"
             className="hidden sm:inline-flex"
           >
@@ -131,11 +140,7 @@ export function Header({ locale }: HeaderProps) {
             <LanguageSwitcher currentLocale={locale} />
             <CurrencySwitcher />
           </div>
-          <Button
-            href={`/${locale}/vehicules`}
-            variant="primary"
-            className="mt-6 w-full"
-          >
+          <Button href={bookNowHref} variant="primary" className="mt-6 w-full">
             {dict.nav.bookNow}
           </Button>
         </div>

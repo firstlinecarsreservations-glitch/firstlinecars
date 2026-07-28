@@ -36,23 +36,23 @@
     "title": "Nos Voitures",
     "description": "Découvrez notre sélection de véhicules récents, entretenus avec soin et prêts à vous accompagner dans tous vos déplacements à Agadir et dans la région Souss-Massa.",
     "filters": {
-      "title": "Filtrer",
-      "brand": "Marque",
-      "transmission": "Transmission",
-      "fuel": "Carburant",
-      "all": "Toutes",
       "manual": "Manuelle",
       "automatic": "Automatique",
       "diesel": "Diesel",
       "essence": "Essence",
-      "hybrid": "Hybride",
-      "reset": "Réinitialiser les filtres"
+      "hybrid": "Hybride"
     },
-    "searchLabel": "Rechercher un véhicule",
-    "searchPlaceholder": "Rechercher un modèle ou une marque...",
     "resultsSingular": "véhicule disponible",
     "resultsPlural": "véhicules disponibles",
-    "noResults": "Aucun véhicule ne correspond à ces filtres."
+    "noResults": "Aucun véhicule disponible pour le moment."
+  },
+  "search": {
+    "pickupDate": "Date de récupération",
+    "pickupTime": "Heure de récupération",
+    "returnDate": "Date de retour",
+    "returnTime": "Heure de retour",
+    "submit": "Rechercher",
+    "loading": "Recherche en cours…"
   },
   "vehicleCard": {
     "seats": "places",
@@ -60,7 +60,11 @@
     "automaticShort": "Auto",
     "manualShort": "Manu",
     "book": "Réserver",
-    "whatsapp": "WhatsApp"
+    "whatsapp": "WhatsApp",
+    "search": "Rechercher",
+    "total": "Total",
+    "day": "jour",
+    "days": "jours"
   },
   "footer": {
     "quickLinks": "Liens rapides",

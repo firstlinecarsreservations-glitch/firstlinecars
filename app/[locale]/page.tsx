@@ -68,7 +68,11 @@ export default async function HomePage({ params }: HomePageProps) {
         </Reveal>
 
         <div className="mt-10">
-          <VehicleGrid vehicles={featuredVehicles} locale={locale} />
+          <VehicleGrid
+            vehicles={featuredVehicles}
+            locale={locale}
+            variant="home"
+          />
         </div>
       </section>
 

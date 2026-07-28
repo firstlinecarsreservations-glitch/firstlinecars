@@ -4,8 +4,9 @@ import { useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { calculateEstimate } from "@/lib/booking";
+import { combineDateTime } from "@/lib/booking";
 import type { Vehicle } from "@/types/vehicle";
+import type { ReservationDates } from "@/types/booking";
 import type { Locale } from "@/lib/i18n";
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
@@ -25,6 +26,8 @@ const MESSAGES = {
     ageTooOld: "Merci de vérifier l'âge saisi.",
     emailInvalid: "Adresse email invalide.",
     datesRequired: "Merci de sélectionner vos dates de location.",
+    returnBeforePickup:
+      "La date de retour ne peut pas précéder la prise en charge.",
     addressRequired: "Merci d'indiquer l'adresse de livraison.",
     airportRequired: "Merci de choisir un aéroport.",
   },
@@ -37,6 +40,7 @@ const MESSAGES = {
     ageTooOld: "Please check the age entered.",
     emailInvalid: "Invalid email address.",
     datesRequired: "Please select your rental dates.",
+    returnBeforePickup: "The return cannot be earlier than the pickup.",
     addressRequired: "Please enter the delivery address.",
     airportRequired: "Please choose an airport.",
   },
@@ -63,17 +67,10 @@ function buildSchema(locale: Locale) {
       deliveryLocation: z.enum(["agency", "airport", "custom"]),
       airportCity: z.enum(["agadir", "marrakech"]).optional(),
       deliveryAddress: z.string().optional(),
-      dateRange: z
-        .object({ from: z.date().optional(), to: z.date().optional() })
-        .optional(),
     })
     // Chaque règle pointe vers le champ concerné (`path`) : l'erreur
     // s'affiche à côté du contrôle fautif au lieu d'un message générique
     // en bas du formulaire, loin de ce qu'il faut corriger.
-    .refine((data) => Boolean(data.dateRange?.from && data.dateRange?.to), {
-      message: t.datesRequired,
-      path: ["dateRange"],
-    })
     .refine(
       (data) =>
         data.deliveryLocation !== "custom" ||
@@ -90,16 +87,22 @@ function buildSchema(locale: Locale) {
 export type BookingFormValues = z.infer<ReturnType<typeof buildSchema>>;
 
 /**
- * Source unique de vérité du formulaire : dates et lieu de livraison
- * étaient auparavant gérés dans des useState séparés, hors de
- * react-hook-form. La moitié des champs avait donc une validation par
- * champ, l'autre moitié un message global — et le serveur pouvait rejeter
- * une saisie que le client considérait valide.
+ * Gère les champs personnels et le lieu de livraison via react-hook-form.
+ * Les dates/heures, elles, vivent dans le Context de réservation et sont
+ * remontées par la page (`dates`) : elles sont pré-remplies depuis la
+ * recherche et restent éditables, sans jamais être ressaisies. Le hook les
+ * combine en dates ISO au moment de l'envoi.
  */
-export function useBookingForm(vehicle: Vehicle, locale: Locale) {
+export function useBookingForm(
+  vehicle: Vehicle,
+  locale: Locale,
+  dates: ReservationDates,
+) {
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [dateError, setDateError] = useState<string | undefined>();
 
   const schema = useMemo(() => buildSchema(locale), [locale]);
+  const messages = MESSAGES[locale];
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(schema),
@@ -114,19 +117,27 @@ export function useBookingForm(vehicle: Vehicle, locale: Locale) {
       deliveryLocation: "agency",
       airportCity: undefined,
       deliveryAddress: "",
-      dateRange: undefined,
     },
   });
 
   const deliveryLocation = form.watch("deliveryLocation");
-  const dateRange = form.watch("dateRange");
-
-  const estimate =
-    dateRange?.from && dateRange?.to
-      ? calculateEstimate(dateRange.from, dateRange.to, vehicle.pricePerDayMad)
-      : null;
 
   async function onSubmit(values: BookingFormValues) {
+    // Les dates viennent des <input> natifs : `min` empêche déjà l'inversion
+    // dans le sélecteur, mais une saisie manuelle pourrait la contourner —
+    // d'où cette validation avant l'envoi, en plus du refine côté serveur.
+    const pickup = combineDateTime(dates.pickupDate, dates.pickupTime);
+    const dropoff = combineDateTime(dates.returnDate, dates.returnTime);
+    if (Number.isNaN(pickup.getTime()) || Number.isNaN(dropoff.getTime())) {
+      setDateError(messages.datesRequired);
+      return;
+    }
+    if (dropoff.getTime() < pickup.getTime()) {
+      setDateError(messages.returnBeforePickup);
+      return;
+    }
+    setDateError(undefined);
+
     setStatus("loading");
     try {
       const response = await fetch("/api/booking", {
@@ -148,8 +159,8 @@ export function useBookingForm(vehicle: Vehicle, locale: Locale) {
             values.deliveryLocation === "custom"
               ? values.deliveryAddress
               : undefined,
-          startDate: values.dateRange!.from!.toISOString(),
-          endDate: values.dateRange!.to!.toISOString(),
+          startDate: pickup.toISOString(),
+          endDate: dropoff.toISOString(),
         }),
       });
       if (!response.ok) throw new Error("Booking request failed");
@@ -169,9 +180,8 @@ export function useBookingForm(vehicle: Vehicle, locale: Locale) {
     form,
     onSubmit: form.handleSubmit(onSubmit),
     deliveryLocation,
-    dateRange,
-    estimate,
     status,
+    dateError,
     startNewBooking,
   };
 }

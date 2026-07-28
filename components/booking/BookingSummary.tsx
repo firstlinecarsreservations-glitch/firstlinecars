@@ -6,12 +6,15 @@ import { useCurrency } from "@/hooks/useCurrency";
 import { PriceTag } from "@/components/ui/PriceTag";
 import { VehicleImage } from "@/components/ui/VehicleImage";
 import type { Vehicle } from "@/types/vehicle";
+import type { BookingEstimate } from "@/types/booking";
 import type { Locale } from "@/lib/i18n";
 
 interface BookingSummaryProps {
   vehicle: Vehicle;
   allVehicles: Vehicle[];
   onChangeVehicle: (id: string) => void;
+  estimate: BookingEstimate;
+  hasDates: boolean;
   locale: Locale;
 }
 
@@ -19,6 +22,8 @@ export function BookingSummary({
   vehicle,
   allVehicles,
   onChangeVehicle,
+  estimate,
+  hasDates,
   locale,
 }: BookingSummaryProps) {
   // Le sélecteur affichait "{prix} MAD" en dur : changer de devise laissait
@@ -44,13 +49,32 @@ export function BookingSummary({
         <h2 className="font-display text-marine-900 mt-1 text-2xl font-semibold tracking-tight">
           {vehicle.model}
         </h2>
-        <p className="font-display text-marine-700 mt-2 text-lg font-bold">
+        {/* Prix / jour en indication, mais le montant mis en avant est le
+           total de la location — le même que celui affiché sur la carte de
+           résultats et dans le formulaire. */}
+        <p className="text-ink-soft mt-2 text-sm">
           <PriceTag priceMad={vehicle.pricePerDayMad} />
-          <span className="text-ink-soft ml-1 text-sm font-normal">
-            {locale === "en" ? "/day" : "/jour"}
-          </span>
+          <span className="ml-1">{locale === "en" ? "/day" : "/jour"}</span>
         </p>
       </div>
+
+      {hasDates && (
+        <div className="bg-marine-50 mt-5 flex items-center justify-between rounded-2xl px-5 py-4">
+          <span className="text-ink-soft text-sm">
+            {estimate.days}{" "}
+            {locale === "en"
+              ? estimate.days > 1
+                ? "days"
+                : "day"
+              : estimate.days > 1
+                ? "jours"
+                : "jour"}
+          </span>
+          <span className="font-display text-marine-900 text-xl font-bold">
+            {format(estimate.totalPriceMad)}
+          </span>
+        </div>
+      )}
 
       <div className="border-marine-100 mt-6 border-t pt-6">
         <label

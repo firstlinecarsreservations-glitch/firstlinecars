@@ -1,6 +1,14 @@
-import { Fuel, Users, Gauge, CalendarCheck } from "lucide-react";
+"use client";
+
+import { Fuel, Users, Gauge, CalendarCheck, Search } from "lucide-react";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { buildVehicleWhatsAppMessage } from "@/lib/whatsapp";
+import {
+  hasValidReservation,
+  useReservation,
+  useReservationEstimate,
+} from "@/hooks/useReservation";
+import { useCurrency } from "@/hooks/useCurrency";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
@@ -11,11 +19,35 @@ import type { Vehicle } from "@/types/vehicle";
 interface VehicleCardProps {
   vehicle: Vehicle;
   locale: Locale;
+  /**
+   * `home` : vitrine sur la page d'accueil — prix indicatif par jour, le
+   * bouton principal renvoie vers la recherche.
+   * `results` : page /vehicules — total pour la durée choisie, le bouton
+   * principal ouvre la réservation.
+   */
+  variant?: "home" | "results";
 }
 
-export function VehicleCard({ vehicle, locale }: VehicleCardProps) {
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+export function VehicleCard({
+  vehicle,
+  locale,
+  variant = "results",
+}: VehicleCardProps) {
   const dict = getDictionary(locale);
   const bookingHref = `/${locale}/booking?carId=${vehicle.id}`;
+
+  // Tant que la recherche n'est pas remplie, on affiche le prix / jour ; dès
+  // que des dates valides sont saisies, la carte bascule sur le total de la
+  // location (recalculé quand les dates changent). Cette bascule vaut aussi
+  // bien sur l'accueil que sur la page résultats.
+  const { dates } = useReservation();
+  const showTotal = hasValidReservation(dates);
+  const estimate = useReservationEstimate(vehicle.pricePerDayMad);
+  const { format } = useCurrency();
 
   const isAutomatic = vehicle.transmission === "automatic";
 
@@ -69,22 +101,33 @@ export function VehicleCard({ vehicle, locale }: VehicleCardProps) {
             {vehicle.model}
           </h3>
           <div className="shrink-0 text-right">
-            <PriceTag
-              priceMad={vehicle.pricePerDayMad}
-              className="font-display text-marine-900 text-2xl font-bold"
-            />
-            <span className="text-ink-soft mt-0.5 block text-[11px] font-semibold tracking-[0.1em] uppercase">
-              {dict.fleet.perDay}
-            </span>
+            {showTotal ? (
+              <>
+                <span className="font-display text-marine-900 block text-2xl font-bold">
+                  {format(estimate.totalPriceMad)}
+                </span>
+                <span className="text-ink-soft mt-0.5 block text-[11px] font-semibold tracking-[0.1em] uppercase">
+                  {dict.vehicleCard.total} · {estimate.days}{" "}
+                  {estimate.days > 1
+                    ? dict.vehicleCard.days
+                    : dict.vehicleCard.day}
+                </span>
+              </>
+            ) : (
+              <>
+                <PriceTag
+                  priceMad={vehicle.pricePerDayMad}
+                  className="font-display text-marine-900 text-2xl font-bold"
+                />
+                <span className="text-ink-soft mt-0.5 block text-[11px] font-semibold tracking-[0.1em] uppercase">
+                  {dict.fleet.perDay}
+                </span>
+              </>
+            )}
           </div>
         </div>
 
-        {/* Trois tuiles de largeur égale, contenu centré. Les tentatives
-           précédentes traitaient les caractéristiques comme du texte
-           libre : en flex groupé à gauche l'espace restait à droite, en
-           grid le mot "Automatique" débordait de sa colonne sur l'icône
-           voisine. Ici chaque tuile fait exactement un tiers, l'écart
-           est identique partout et rien ne peut se chevaucher. */}
+        {/* Trois tuiles de largeur égale, contenu centré. */}
         <ul className="mt-5 grid grid-cols-3 gap-2.5">
           {specs.map((spec) => {
             const Icon = spec.icon;
@@ -113,10 +156,20 @@ export function VehicleCard({ vehicle, locale }: VehicleCardProps) {
         {/* mt-auto : quelle que soit la longueur du nom du modèle, les
            boutons de toutes les cartes d'une rangée s'alignent. */}
         <div className="mt-auto flex flex-col gap-2.5 pt-6">
-          <Button href={bookingHref} variant="secondary" className="w-full">
-            <CalendarCheck className="h-4 w-4" aria-hidden="true" />
-            {dict.vehicleCard.book}
-          </Button>
+          {variant === "results" ? (
+            <Button href={bookingHref} variant="secondary" className="w-full">
+              <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+              {dict.vehicleCard.book}
+            </Button>
+          ) : (
+            // Sur l'accueil, « Rechercher » ne lance pas de réservation : il
+            // ramène l'utilisateur tout en haut de la page, sur le formulaire
+            // du Hero, pour démarrer le parcours par le choix des dates.
+            <Button variant="secondary" className="w-full" onClick={scrollToTop}>
+              <Search className="h-4 w-4" aria-hidden="true" />
+              {dict.vehicleCard.search}
+            </Button>
+          )}
           <WhatsAppButton
             message={buildVehicleWhatsAppMessage(
               vehicle.brand,

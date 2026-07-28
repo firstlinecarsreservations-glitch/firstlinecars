@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @config "../tailwind.config.ts";
-@import "react-day-picker/style.css";
 
 
 @layer base {
@@ -39,64 +38,6 @@
     background-color: #f3d397;
     color: #0a2f2e;
   }
-}
-
-/* react-day-picker v10 — thème aux couleurs de la marque.
-   Les valeurs précédentes étaient des CHAÎNES ("0F4C4A"), sans dièse et
-   entre guillemets : elles n'étaient donc pas des couleurs valides et
-   étaient ignorées. Les jours sélectionnés gardaient alors la couleur de
-   texte blanche par défaut de la librairie sur un fond invalide, donc
-   transparent — d'où une sélection blanche sur blanc, invisible.
-   `--rdp-selected-color` n'existe plus non plus en v10 (nom de la v8). */
-.flc-daypicker {
-  --rdp-accent-color: #0f4c4a; /* marine-700 : jour sélectionné */
-  --rdp-accent-background-color: #cee3e2; /* marine-100 : intérieur de plage */
-  --rdp-today-color: #c98a22; /* amber-600 */
-
-  --rdp-range_start-color: #ffffff;
-  --rdp-range_end-color: #ffffff;
-  --rdp-range_middle-color: #0a2f2e; /* marine-900 sur marine-100 */
-
-  --rdp-day_button-border-radius: 0.625rem;
-  --rdp-day-height: 2.5rem;
-  --rdp-day-width: 2.5rem;
-  --rdp-day_button-height: 2.5rem;
-  --rdp-day_button-width: 2.5rem;
-
-  width: 100%;
-  font-size: 0.875rem;
-}
-
-.flc-daypicker table {
-  width: 100%;
-  table-layout: fixed;
-}
-.flc-daypicker th,
-.flc-daypicker td {
-  width: 14.2857%;
-  text-align: center;
-}
-
-/* Le sélecteur précédent visait `button` sans restriction : il étirait
-   aussi les flèches de navigation sur toute la largeur de leur cellule. */
-.flc-daypicker .rdp-day,
-.flc-daypicker .rdp-day_button {
-  width: 100%;
-}
-
-/* La librairie passe les jours sélectionnés en `font-size: large`, ce qui
-   fait sauter la hauteur des lignes pendant la sélection. */
-.flc-daypicker .rdp-selected {
-  font-size: inherit;
-  font-weight: 600;
-}
-
-.flc-daypicker .rdp-weekday {
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #3a4f52;
 }
 
 @media (prefers-reduced-motion: reduce) {
